@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  server:
+    image: node:16-alpine
+    container_name: server
+    working_dir: /src/apps/server
+    volumes:
+      - .:/src
+    entrypoint: yarn dev
+    ports:
+      - 3000:3000
+      - 9229:9229 # enable nodejs devtools debugger
+    healthcheck:
+      test: 'wget -nv -t1 --spider http://localhost:3000/status || exit 1'
+      interval: 3s
+      timeout: 3s
+      start_period: 60s
+
+  web:
+    image: node:16-alpine
+    container_name: web
+    working_dir: /src/apps/web
+    volumes:
+      - .:/src
+    entrypoint: yarn dev
+    ports:
+      - 8080:8080
+    depends_on:
+      server:
+        condition: service_healthy

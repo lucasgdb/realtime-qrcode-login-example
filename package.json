@@ -1,0 +1,27 @@
+{
+  "name": "realtime-qrcode-login-example",
+  "version": "1.0.0",
+  "description": "A example of a realtime app login using qrcode",
+  "repository": "https://github.com/lucasgdb/realtime-qrcode-login-example",
+  "author": "lucasgdb",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "docker-compose up -d"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.3"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*"
+    ],
+    "nohoist": [
+      "**/expo"
+    ]
+  }
+}
